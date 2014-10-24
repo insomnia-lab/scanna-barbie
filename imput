@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# this line is in /etc/inittab
+# 1:2345:respawn:/sbin/getty  -n -l /usr/local/bin/imput 38400 tty1
+# 
+#
+
+evvai() {
+aplay /usr/share/sounds/complete.wav
+}
+nooo() {
+	echo "No porcoddio non l'ha creato" >&2
+	aplay /usr/share/sounds/alsa/Noise.wav
+}
+
+chdkptp -c -erec
+while read l; do
+NOMEFILE="rs-$(date +%s)"
+	chdkptp -c -e"remoteshoot -raw $NOMEFILE"
+	if [[ ! -f "$NOMEFILE.raw" ]]; then
+nooo
+else
+evvai
+	fi
+done
